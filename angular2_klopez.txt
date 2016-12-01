@@ -1,0 +1,134 @@
+AngularJS is by far the most popular JavaScript framework available today for creating web applications. 
+And now Angular 2 and TypeScript are bringing true object oriented web development to the mainstream, 
+in a syntax that is strikingly close to Java 8.
+
+
+Motivations for Angular 2.0
+
+So, you might be wondering: Why make Angular 2.0 at all? Why make such a big jump to 2.0 and why so many 
+breaking changes? Is this all arbitrary? I can deal with a few changes, but from what I've been hearing, 
+there are lots of big changes in 2.0. Are they really justified? Is it worth it?
+
+I'd like to take a few moments to talk about some of the high level motivations for the changes that are coming in 2.0
+ before I dig into the details of features. I hope this will provide a foundation of understanding upon which those later 
+details can sit and provide a basis for meaningful criticism (some of which I intend to offer up myself).
+Performance
+
+When AngularJS was first created, almost five years ago, it was not originally intended for developers. 
+It was a tool targeted more at designers who needed to quickly build persistent HTML forms. 
+Over time it has changed to accommodate a variety of scenarios and developers have picked it up and used it to build
+ more and more complex applications. The Angular 1.x team has worked hard over the years to make incremental 
+changes to the design, allowing it to continue to be relevant as the needs of modern web applications have changed. 
+However, there are hard limits on the improvements that can be made, due to assumptions that were made as part of 
+the original design. A number of these limits relate to performance problems resulting from the current binding and 
+templating infrastructure. In order to fix those problems, new strategies are needed.
+
+The Changing Web
+
+In the five years since Angular was first conceived, the web has changed significantly.
+ For example, five years ago it was almost impossible to build a proper cross-browser site without help from something
+ like jQuery. However, today's browsers are not only more consistent in their DOM implementations, 
+but these implementations are faster and offer new features particularly pertinent to application frameworks.
+
+And the web continues to change...
+
+While massive changes have happened in the last couple of years, they pale in comparison to what's coming in 
+the next 1-3 years. In a few months the ES6 spec will be finalized. It's not unreasonable to think that we'll see a browser 
+in 2015 that implements the full spec. Today's browsers already support some of these features and are working on 
+implementations of the rest right now. This means browser support for things like modules, classes, lambdas, 
+generators, etc. These features fundamentally transform the JavaScript programming experience. 
+But big changes aren't constrained merely to JavaScript. Web Components are on the horizon. 
+The term Web Components usually refers to a collection of four related W3C specifications:
+
+    Custom Elements - Enables the extension of HTML through custom tags.
+    HTML Imports - Enables packaging of various resources (HTML, CSS, JS, etc.).
+    Template Element - Enables the inclusion of inert HTML in a document.
+    Shadow DOM - Enables encapsulation of DOM and CSS.
+
+By combining these four capabilities web developers can create declarative components (Custom Elements) which 
+are fully encapsulated (Shadow DOM). These components can describe their own views (Template Element) and 
+can be easily packaged for distribution to other developers (HTML Imports). When these specifications become 
+available in all major browsers, we are likely to see developer creativity explode as many endeavor to create reusable 
+components to solve common problems or address deficiencies in the standard HTML toolkit
+ (from Databinding With Web Components). It's already possible today in Chrome and the other browsers have some 
+of these specs implemented and are working on others. The future sounds awesome right? There's just one problem: 
+most of today's databinding frameworks aren't prepared for this. Most frameworks, Angular 1.x included, 
+have a databinding system that works based on the assumption of a small number of known HTML elements with
+ well-known events and behaviors. In order for Angular developers to take advantage of Web Components, 
+a new implementation of databinding is needed.
+
+Mobile
+
+Speaking of five years ago...me oh my how the computing landscape has changed! Phones and tablets 
+are everywhere! While Angular can be used to build mobile apps, it wasn't designed with them in mind. 
+This includes everything from the fundamental performance issues I've already mentioned to missing capabilities 
+of its router, the inability to cache pre-compiled views and even lackluster touch support. Some of these things 
+can be bolted on to Angular 1.3 (like the router for example) but others require fundamental changes to fix.
+
+Ease of Use
+
+Let's be honest...AngularJS isn't exactly the easiest thing to learn. Yeah, you pick it up and you think to yourself
+ "This is awesome. It's really easy and magical!!!" Then you start building your app and find yourself going
+ "holy...what!!?? I don't understand!!!" I've heard this story over and over again. 
+There's even a handy graphic to illustrate the point. A lot of this, once again, 
+stems back to the original design and intent of the library. Originally, there were no custom directives, for example.
+ They were all hardcoded. Then, an API to add them was made available. Originally there were no controllers, then...
+. You get the picture. This bolting on of features, many which are today considered core ideas, has resulted in a less than
+ elegant API. If Angular is to be truly easy to learn and use, then it has to have a clear understanding of its own core
+ features from the outset. A framework where directives and controllers are part of the initial design, rather than bolted on
+ after the fact is going to be better on many counts.
+
+Features and Design of Angular 2.0
+AtScript
+
+AtScript is a language that is a superset of ES6 and it's being used to author Angular 2.0. It uses TypeScript's type syntax to represent optional 
+types which can be used to generate runtime type assertions, rather than compile-time checks. It also extends the language with metadata annotations.
+
+Here's an example of what some AtScript code looks like:
+
+import {Component} from 'angular';  
+import {Server} from './server';
+
+@Component({selector: 'foo'})
+export class MyComponent {  
+  constructor(server:Server) {
+      this.server = server;
+  }
+}
+
+Templating and Databinding
+
+If you've read this far, you must be very curious about Angular 2.0. Thanks for taking so much time. We've still got a way to go and we're about to get into the really interesting stuff: templating and binding. I'm going to discuss them in tandem here. While the databinding system is technically separate from the templating system, you experience them as a single unit when you write apps. So, I think addressing them side-by-side makes the most sense.
+
+Let's start by understanding how a view gets on screen, then break things down a bit. Essentially, you start with an HTML fragment. This will live inside a <template> element. That HTML fragment is handed to the template compiler. The compiler traverses the fragment, identifying any directives, binding expressions, event handlers, etc. All of this data is extracted from the DOM itself into data structures which can be used to eventually instantiate the template. As part of this phase, some processing is done on the data such as parsing the binding expressions, for example. Every node that contains one of these special instructions is then tagged with a special class. The result of this process is cached so that none of this work needs to be repeated. We call this result a ProtoView. Once you've got a ProtoView you can use it to create a View. When a ProtoView makes a View all the directives that were previously identified are instantiated and attached to their DOM nodes. Watches are set up on binding expressions. Event handlers are configured. You get the idea. The data structures that were previously processed in the compile phase allow us to do this very quickly. Once you've got a View, you can display it by adding it to a ViewPort. A ViewPort represents a region of the screen that you can display Views in. As a developer you won't see most of this, you'll just write templates and it will work. But I wanted to layout the process at a high level briefly before I dig into the details.
+Dynamic Loading
+
+One of the huge missing features in Angular 1.x was dynamic loading of code. If you wanted to add new directives or controllers on the fly, that was very hard or impossible. It certainly wasn't supported. In 2.0 we've designed things from scratch with async in mind. So, when you go to compile a template, that's actually an async process.
+
+Now I need to mention a detail of template compilation I left out in my simplified explanation above. When you compile a template, you not only provide the compiler with a template, but you also provide a Component definition. We'll get into the details of that in a bit. For the sake of this explanation, the Component definition contains metadata about what directives, filters, etc. were used in the template. This ensures that the necessary dependencies are loaded before the template gets processed by the compiler. Because we are basing our code on the ES6 module spec, simply referencing the dependencies in the Component definition will cause the module loader to load them, if they haven't already been loaded. So, by integrating with ES6 modules in this way, we get dynamic loading of whatever we want for free.
+Directives
+
+Before we dig into the syntax of templates, we need to look at directives, Angular's means of extending HTML itself. In Angular 1.x the Directive Definition Object (DDO) was used to create directives. This seems to be one of the great sources of suffering for many an Angular developer.
+
+What if we could make directives simpler?
+
+We've been talking about modules, classes and annotations. What if we could leverage those core constructs to build directives? Well, of course that's what we did.
+
+In Angular 2.0 there are three types of directives.
+
+    Component Directive - Creates a custom component composed of a View and a Controller. You can use it as a custom HTML element. Also, the router can map routes to Components.
+    Decorator Directive - Decorates an existing HTML element with additional behavior. A classic example is ng-show.
+    Template Directive - Transforms HTML into a reusable template. The directive author can control when and how the template is instantiated and inserted into the DOM. Examples include ng-if and ng-repeat.
+
+You may have heard that Controllers are dead in Angular 2.0. Well, that's not exactly true. In reality, Controllers are one part of what we are calling a Component. The Component has a View and a Controller. The View is your HTML template and the Controller has your JavaScript behavior. Rather than needing an explicit registration API for the controller or some non-standard APIs like 1.x, in 2.0 you can just create a plain class with some annotations. Here's an example of the controller half of a tab container component (we'll look at the view a bit later):
+
+
+Summary
+
+Given Angular's design origins in combination with the changing web and general computing landscape, it's pretty
+ clear that some changes are needed. In fact, without starting to address these issues now, Angular runs the risk of 
+being obsolete within a year's time. A framework that cannot work with Web Components, bogs down on mobile or 
+continues to push its own module and class API against the standards, is not going to last long. 
+The Angular team's answer to these problems is a new version: Angular 2.0.
+ It is essentially a re-imagining of AngularJS for the modern web, taking into account everything that has been 
+learned over the last five years.
