@@ -1,0 +1,6 @@
+Given Angular's design origins in combination with the changing web and general computing landscape, it's pretty clear that some changes are needed.
+In fact, without starting to address these issues now, Angular runs the risk of being obsolete within a year's time.
+A framework that cannot work with Web Components, bogs down on mobile or continues to push its own module and class API against the standards, is not going to last long.
+The Angular team's answer to these problems is a new version: Angular 2.0. It is essentially a re-imagining of AngularJS for the modern web, taking into account everything that has been learned over the last five years.
+AtScript is a language that is a superset of ES6 and it's being used to author Angular 2.0. It uses TypeScript's type syntax to represent optional types which can be used to generate runtime type assertions, rather than compile-time checks.
+The main goal of Angular 2 is to create a web framework that is super easy to learn and just works.
