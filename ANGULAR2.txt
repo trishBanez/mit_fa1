@@ -1,0 +1,40 @@
+*** ANGULAR ***
+
+Angular is a development platform for building mobile and desktop web applications. This is the repository for Angular 2 Typescript/JavaScript (JS).
+
+*** ANGULAR 2 ***
+
+AngularJS is by far the most popular JavaScript framework available today for creating web applications. And now Angular 2 and TypeScript are bringing true object oriented web development to the mainstream, in a syntax that is strikingly close to Java 8. At the end of 2014 Google announced that Angular 2 would be a complete rewrite of AngularJS, and they even created a new language “AtScript” that was meant to be used for writing Angular 2 applications.
+
+But then Microsoft agreed to add support for decorators (a.k.a. annotations) to their TypeScript language (a strict superset of JavaScript), and so that emerged as the language for the development of the Angular 2 framework itself, and the recommended language for developing applications using the AngularJS framework.
+
+You can also develop Angular 2 apps in JavaScript (both ECMAScript 5 and 6) and in Dart.
+
+In addition, the Angular team integrated yet another Microsoft product - the RxJS library of reactive JavaScript extensions, into the Angular 2 framework.
+
+Angular 2 is not an MVC framework, but rather a component-based framework. In Angular 2 an application is a tree of loosely coupled components.
+
+*** WHY ANGULAR 2.0? ***
+
+Before getting into further discussion about Angular 2.0 (which has an estimated release date of the end of 2015), let’s briefly consider the philosophy behind the new version. Angular 2.0 development was started to address the following concerns:
+
+-Mobile
+
+The new Angular version will be focused on the development of mobile apps. The rationale is that it’s easier to handle the desktop aspect of things, once the challenges related to mobile (performance, load time, etc.) have been addressed.
+
+-Modular
+
+Various modules will be removed from Angular’s core, resulting in better performance. These will find their way into Angular’s ever-growing ecosystem of modules, meaning you’ll be able to pick and choose the parts you need.
+
+-Modern
+
+Angular 2.0 will target ES6 and “evergreen” modern browsers (those automatically updated to the latest version). Building for these browsers means that various hacks and workarounds that make Angular harder to develop can be eliminated allowing developers to focus on the code related to their business domain.
+
+*** WHAT'S THE CONTROVERSY? ***
+
+During the ng-conference there was no mention of a migration path to version 2.0. It was also pointed out that the jump to 2.0 version will lead to broken Angular 1.3 apps, as there won’t be any backwards compatibility. Since then, the developer community has been abuzz with uncertainty and speculation, with some developers questioning if it’s even worth starting a new Angular 1.3 project.
+
+*** What Are the Changes? ***
+AtScript
+
+AtScript is a superset of ES6 and it’s being used to develop Angular 2.0. It’s processed by the Traceur compiler (along with ES6) to produce ES5 code and uses TypeScript’s type syntax to generate runtime type assertions instead of compile time checks. However, AtScript isn’t compulsory—you will still be able to use plain JavaScript/ES5 code instead of AtScript to write Angular apps.
