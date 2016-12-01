@@ -1,4 +1,4 @@
-Daniel Longalong
+Daniel Longalong :)
 MIT Activity #
 
 
@@ -11,7 +11,7 @@ It also render same code in different way on browser as well as on mobile app.
 TypeScript:
 TypeScript(TS) is used heavily in Angular 2. Google currently using DART for coding. 
 DART or TypeScript can be used for Angular 2. Learning TypeScript is very good since other frameworks and libraries i.e. 
-REACTJS is also using TS. Hence if one can learn TS it’s very easily to implement REACTJS and other libraries in project.
+REACTJS is also using TS. Hence if one can learn TS itâ€™s very easily to implement REACTJS and other libraries in project.
 
 If any developer is coming from JAVA, .NET background TypeScript is very easy to learn.
 
