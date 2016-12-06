@@ -1,12 +1,12 @@
-Angular 2 is the next version of Googleís massively popular MV* framework for building complex applications in the browser (and beyond).
+Angular 2 is the next version of Google‚Äôs massively popular MV* framework for building complex applications in the browser (and beyond).
 
 When Angular 2 was announced in October 2014 at the ngEurope conference, the ngCommunity was up in arms: what did this mean for their favorite framework they invested so much time into learning and building real things with? A lot of Angular developers were worried that Angular 2 would spell the end for Angular.
 
-Few teams are as invested in Angular as the Ionic team is. Weíve spent years building our entire business on Angular. When Angular 2 was announced, we were also concerned that the next version of our favorite framework would negatively impact us.
+Few teams are as invested in Angular as the Ionic team is. We‚Äôve spent years building our entire business on Angular. When Angular 2 was announced, we were also concerned that the next version of our favorite framework would negatively impact us.
 
 What we found when we started building with Angular 2, though, was something beyond our wildest dreams: a faster, more powerful, cleaner, and easier to use tool than we had with Angular 1. We found a tool that embraced future web standards and brought ES6 to more developers around the world.
 
-In many ways, Angular 2 still felt like Angular, it was just based on new JavaScript standards and using best-practices developed in the years after the first Angular release. ìAngularî had become a design pattern with multiple implementations.
+In many ways, Angular 2 still felt like Angular, it was just based on new JavaScript standards and using best-practices developed in the years after the first Angular release. ‚ÄúAngular‚Äù had become a design pattern with multiple implementations.
 
 We realized that Angular 2 would make it easier to use Ionic, not harder. That it would give us performance gains we desperately needed to push forward our goal of making the web win on mobile. That it would make it easier to write clean, testable code that would run on more devices and platforms. That it would help us empower more web developers to build great mobile apps.
 
@@ -31,4 +31,4 @@ Loved by Millions
 
 From prototype through global deployment, Angular delivers the productivity and scalable infrastructure that supports Google's largest applications.
 
-https://angular.io/
+https://angular.io/ 
